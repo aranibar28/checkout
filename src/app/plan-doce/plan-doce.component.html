@@ -17,7 +17,7 @@
   </div>
   <div class="margin-b-1 text-blue">
     <div class="flex justify-between">
-      <h2 class="text-bolder">Total</h2>
+      <h2 class="text-bolder">Total {{ getDisplayName(selectedPlan.i_DuracionMeses) | lowercase }}</h2>
       <h2 class="text-bolder">
         {{ selectedPlan.i_MonedaPrecioId == 1 ? "S/" : "$" }}
         {{ getTotal() | currency: "INR":"" }}

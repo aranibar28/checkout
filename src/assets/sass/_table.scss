@@ -1,0 +1,25 @@
+.table{border: 1px $grey solid;
+        border-collapse: collapse;
+        padding: 0px;
+        border-radius: 5px;}
+
+.table tbody tr td{
+                border-bottom: 0px;
+                padding: 0.7rem;
+                        
+                }
+.table thead th{border: 0px;
+        padding: 0.8rem;}
+
+
+
+
+.table-platinum{background-color: white;}
+
+.table-platinum thead{background-color: $platinum;
+                        color: $dark;
+                        border-bottom: $platinum-hover 1px solid;}
+
+.table-platinum tbody tr:hover{background-color: $platinum;
+                                                transition: all 0.3s;}
+

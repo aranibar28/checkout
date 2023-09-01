@@ -1,0 +1,210 @@
+* {
+  box-sizing: border-box;
+}
+
+.input-group {
+  display: flex;
+  width: fit-content;
+  flex-wrap: wrap;
+}
+
+.input-group label {
+  padding: 0.2rem;
+}
+
+.input-group input[type="text"],
+textarea,
+select,
+input[type="date"],
+input[type="number"] {
+  border: solid 2px $grey;
+  padding: 0.5rem;
+  outline: none;
+  color: $dark;
+  border-radius: 5px;
+}
+.form-control {
+  border: solid 2px $grey;
+  padding: 0.5rem;
+  outline: none;
+  color: $dark;
+  border-radius: 5px;
+}
+.input-group-column {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.input-group-column label {
+  transform: translateY(40%);
+  background: white;
+  width: fit-content;
+  border-radius: 5px;
+  padding: 0.2rem;
+}
+
+.password-container {
+  position: relative;
+  input {
+    width: 100%;
+  }
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.input-group-column input[type="text"],
+textarea,
+select,
+input[type="date"],
+input[type="number"] {
+  border: solid 2px $grey;
+  padding: 0.5rem;
+  outline: none;
+  color: $dark;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+//Input Type Search
+
+.input-couple {
+  display: flex;
+}
+
+.input-couple input[type="number"],
+input[type="search"],
+input[type="text"] {
+  border-width: 2px 0px 2px 2px;
+  border-color: $grey;
+  border-style: solid;
+  padding: 0.5rem;
+  outline: none;
+  width: 100%;
+  color: $dark;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.input-couple button {
+  border-radius: 0px 5px 5px 0px;
+  cursor: pointer;
+  width: 50px;
+  width: 40px;
+  padding: 0px 10px 0px 10px;
+}
+
+//input Type Checkbox
+
+.input-checkbox label {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+}
+
+.input-checkbox input[type="checkbox"],
+input[type="radio"] {
+  display: none;
+}
+
+.input-checkbox label::before {
+  content: "";
+  display: flex;
+  width: 0.8rem;
+  height: 0.8rem;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 2px;
+  margin: 2px;
+  color: $dark;
+  border: 2px solid $grey;
+  border-radius: 3px;
+}
+
+.input-checkbox input[type="checkbox"]:checked ~ label::before {
+  content: "✓";
+  font-size: 0.8rem;
+}
+
+.input-checkbox input[type="radio"]:checked ~ label::before {
+  content: "✓";
+  font-size: 0.8rem;
+}
+
+.check-orange input[type="radio"]:checked ~ label::before {
+  color: $orange;
+  font-weight: bolder;
+}
+
+.check-red input[type="radio"]:checked ~ label::before {
+  color: $red;
+  font-weight: bolder;
+}
+
+.check-blue input[type="radio"]:checked ~ label::before {
+  color: $blue;
+  font-weight: bolder;
+}
+.check-green input[type="radio"]:checked ~ label::before {
+  color: $green;
+  font-weight: bolder;
+}
+
+.check-yellow input[type="radio"]:checked ~ label::before {
+  color: $yellow;
+  font-weight: bolder;
+}
+
+//File Image
+
+.input-image {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border-radius: 5px;
+}
+
+.input-image label {
+  border-radius: 5px;
+  border: 2px solid $grey;
+  width: 100%;
+
+  transform: translateY(0%);
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+}
+
+.input-image label img {
+  width: 150px;
+}
+
+.input-image input[type="file"] {
+  display: none;
+}
+
+/*INPUT LABEL*/
+
+.input-label {
+  padding: 0.2rem;
+  margin-top: 0.4rem;
+}

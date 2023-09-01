@@ -1,0 +1,181 @@
+<div class="fade-in container justify-start h-100" style="padding-top: 45px;">
+  <div class="margin-b-1 text-blue" style="font-size: 18px;">
+    <div class="flex justify-between">
+      <span>Precio regular {{ getDisplayName(selectedPlan.i_DuracionMeses) }}</span>
+      <span [class.text-line]="getDescuento() > 0">
+        {{ selectedPlan.i_MonedaPrecioId == 1 ? "S/" : "$" }}
+        {{ getPrecioRegularPlan() | currency: "INR":"" }}
+      </span>
+    </div>
+    <div class="flex justify-between">
+      <span>Descuento</span>
+      <span>
+        {{ selectedPlan.i_MonedaPrecioId == 1 ? "S/" : "$" }}
+        {{ getDescuento() | currency: "INR":"" }}
+      </span>
+    </div>
+  </div>
+  <div class="margin-b-1 text-blue">
+    <div class="flex justify-between">
+      <h2 class="text-bolder">Total</h2>
+      <h2 class="text-bolder">
+        {{ selectedPlan.i_MonedaPrecioId == 1 ? "S/" : "$" }}
+        {{ getTotal() | currency: "INR":"" }}
+      </h2>
+    </div>
+  </div>
+  <div class="margin-b-2">
+    <h3 class="text-center text-blue text-bolder micro-margin-y">¿Deseas adquirir licencias adicionales?</h3>
+    <div class="row w-100" style="font-size: 14px;">
+      <div class="c6">
+        <div class="input-group-column">
+          <label>Licencias</label>
+          <input (keypress)="numberOnly($event)" onselectstart="return false" onpaste="return false"
+            oncopy="return false" oncut="return false" ondrag="return false" ondrop="return false" autocomplete="off"
+            type="number" step="0" maxlength="1" min="0" [(ngModel)]="selectedLicencia.Cantidad" />
+        </div>
+      </div>
+      <div class="c6 justify-end">
+        <div *ngIf="loadingLicencias" class="flex margin-l-1" style="margin-bottom: 9px;">
+          <fa-icon [icon]="faSpinner" [spin]="loadingLicencias"></fa-icon>
+          <span style="margin-left: 5px;">Cargando...</span>
+        </div>
+        <span *ngIf="!loadingLicencias" class="flex items-center margin-l-1" style="margin-bottom: 9px;">
+          <span data-title="Licencias adicionales = Usuarios que pueden ingresar al sistema."
+            class="badge rounded-pill bg-g-dark" style="margin-right: 3px">?</span>
+          {{ selectedLicencia.i_MonedaPrecioId == 1 ? "S/" : "$" }}
+          {{ selectedLicencia.d_Precio * igv | currency: "INR":"" }} cada una
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="margin-b-1">
+    <button (click)="checkout()" class="btn btn-blue w-100" style="width: 100%; font-size: 17.5px;">
+      Adquirir Ahora
+    </button>
+    <div class="text-left text-blue" style="margin-top: 5px;">
+      <small>Precios incluyen IGV</small>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <h1>
+    <i
+      class="icon-crown text-orange font-size-2"
+      *ngIf="selectedPlan.i_DuracionMeses == 12"
+    ></i>
+    <span>Plan {{ selectedPlan.v_Nombre }}</span>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="c12 padding-x-2">
+    <span *ngIf="selectedPlan.i_CantComprobantes > 0"
+      >{{ selectedPlan.i_CantComprobantes }} Comprobantes</span
+    >
+    <span *ngIf="selectedPlan.d_ImporteComprobanteAdicional > 0"
+      >Importe por comprobantes adicionales: S/
+      {{ selectedPlan.d_ImporteComprobanteAdicional }} + IGV</span
+    >
+    <span *ngIf="selectedPlan.i_CantidadProductosTienda > 0">
+      Productos (Tienda): {{ selectedPlan.i_CantidadProductosTienda }}
+    </span>
+    <span>{{ licencias }} Licencia de uso</span>
+    <span
+      ><b>Soporte: Solamente mediante Tickets y/o correo electronico</b></span
+    >
+  </div>
+</div>
+
+<div class="row">
+  <h2 class="text-blue">
+    <i class="icon-right-circle font-size-1"></i> Precio Regular del Plan
+  </h2>
+</div>
+
+<div class="row padding-x-2">
+  <h1
+    class="text-red"
+    [class]="selectedPlan.d_PorcDescuento > 0 ? 'text-line' : ''"
+  >
+    {{ selectedPlan.i_MonedaPrecioId == 1 ? "S/" : "$" }}
+    {{ getPrecioRegularPlan() | currency: "INR":"" }}
+  </h1>
+</div>
+
+<div *ngIf="loadingLicencias; else tLicencias">
+  <h4 class="text-center">
+    <fa-icon [icon]="faSpinner" [spin]="loadingLicencias"></fa-icon> Cargando...
+  </h4>
+</div>
+<ng-template #tLicencias>
+  <div
+    class="row"
+    *ngIf="selectedLicencia != null && selectedLicencia.i_PlanId > 0"
+  >
+    <h2 class="text-blue">
+      <i class="icon-right-circle font-size-1"></i> ¿Cuántas licencias
+      adicionales quieres?
+    </h2>
+  </div>
+
+  <div
+    class="row padding-x-2 border-grey border-bottom-1"
+    *ngIf="selectedLicencia != null && selectedLicencia.i_PlanId > 0"
+  >
+    <div class="row w-100">
+      <div class="c3">
+        <div class="input-group-column">
+          <label for="">Licencias</label>
+          <input
+            (keypress)="numberOnly($event)"
+            onselectstart="return false"
+            onpaste="return false"
+            oncopy="return false"
+            oncut="return false"
+            ondrag="return false"
+            ondrop="return false"
+            autocomplete="off"
+            type="number"
+            step="0"
+            maxlength="1"
+            [(ngModel)]="selectedLicencia.Cantidad"
+          />
+        </div>
+      </div>
+      <div class="c6 justify-center">
+        <span class="padding-2">
+          <span
+            data-title="Licencias adicionales = Usuarios que pueden ingresar al sistema."
+            class="badge rounded-pill bg-g-dark"
+            style="margin-right: 3px"
+            >?</span
+          >
+          {{ selectedLicencia.i_MonedaPrecioId == 1 ? "S/" : "$"
+          }}{{ selectedLicencia.d_Precio | currency: "INR":"" }} +IGV
+        </span>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<div class="row">
+  <h2 class="text-blue">
+    <i class="icon-right-circle font-size-1"></i>
+    {{ selectedPlan.d_PorcDescuento > 0 ? "Total con Descuento" : "Total" }}
+  </h2>
+</div>
+
+<div class="row padding-x-2">
+  <h1 class="text-dark">
+    {{ selectedPlan.i_MonedaPrecioId == 1 ? "S/" : "$"
+    }}{{ getTotal() | currency: "INR":"" }}
+  </h1>
+</div>
+
+<div class="row w-50 margin-b-1">
+  <button (click)="checkout()" class="btn btn-blue w-100">
+    <i class="icon-basket"></i> Adquirir Plan
+  </button>
+</div>
+ -->

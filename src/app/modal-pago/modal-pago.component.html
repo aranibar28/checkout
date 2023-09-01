@@ -1,0 +1,151 @@
+<div
+  class="row w-50 bg-white border-radius-1 overflow-hidden"
+  style="margin-top: 0rem"
+>
+  <div class="row justify-space-between padding-2 bg-g-blue align-center">
+    <span class="text-white" style="font-size: 20px"
+      >Notificación de Pagos</span
+    >
+  </div>
+  <div class="modal-body">
+    <div
+      class="text-center padding-2"
+      style="font-size: 2.5rem"
+      *ngIf="isSavingPago || loadingPagos; else tp"
+    >
+      <fa-icon [icon]="faCircleNotch" [spin]="true"></fa-icon>
+      Cargando..
+    </div>
+    <ng-template #tp>
+      <div
+        *ngIf="(!isSavingPago || !loadingPagos) && !statusPago"
+        class="row padding-2"
+      >
+        <div class="c12">
+          <div class="row">
+            <div class="c12">
+              <div class="card">
+                <div class="card-body" style="padding: 0">
+                  <h3 class="card-title text-center">
+                    Seleccione los servicios de los cuales notificara su pago
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="c12 margin-t-1">
+              <div class="card">
+                <div class="card-body">
+                  <table class="table">
+                    <tbody>
+                      <tr
+                        *ngFor="let item of lstPlanesPendientes; let i = index"
+                      >
+                        <td>
+                          <input
+                            [(ngModel)]="item.Selected"
+                            type="checkbox"
+                            id="chk-{{ i }}"
+                          />
+                        </td>
+                        <td>
+                          {{ item.Subscripcion }} <br />
+                          {{ item.NomPlan }} x {{ item.Cantidad }}
+                          <br />
+                          Solicitado el
+                          {{ item.FechaSolicitud | date: "dd/MM/yyyy" }}
+                        </td>
+                        <td>{{ item.Precio }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="c12 margin-t-1">
+              <div class="card">
+                <div class="card-body">
+                  <span> Total del Deposito: </span>
+                  <span style="float: right">
+                    PEN {{ getTotalImporte() | currency: "INR":"" }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="c12 margin-t-1 div-center">
+              <button class="btn btn-outline-blue" (click)="showModalCuenta()">
+                Cuentas Bancarias
+              </button>
+            </div>
+            <div class="c12 margin-t-1">
+              <div class="card">
+                <div class="card-body">
+                  <div class="input-group-column">
+                    <label for="voucher" style="z-index: unset !important;">Adjuntar Voucher</label>
+                    <input
+                      name="imageUrl"
+                      type="file"
+                      accept="image/*"
+                      (change)="handleInputChange($event)"
+                      id="voucher"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="c12 items-center margin-t-1">
+              <img
+                [src]="imageSrc"
+                style="max-width: 300px; max-height: 300px"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <div class="row padding-2" *ngIf="!isSavingPago && statusPago">
+      <div class="row padding-2">
+        <div class="c12 div-center">
+          <div style="font-size: 3rem">
+            <span
+              class="badge badge-checkout"
+              [class]="statusPago ? 'bg-success' : 'bg-danger'"
+            >
+              <fa-icon [icon]="statusPago ? faCheck : faTimes"></fa-icon>
+            </span>
+          </div>
+          <h5 style="font-size: 20px">{{ messagePago }}</h5>
+          <a
+            href="https://web.factesol.net.pe/"
+            target="_blank"
+            class="btn btn-blue"
+          >
+            <fa-icon [icon]="faShare" style="margin-right: 3px"></fa-icon> Ir al
+            Factesol Web</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row padding-1" style="border-top: 1px solid #efefef">
+    <div class="c12 items-center" *ngIf="!statusPago">
+      <button
+        [disabled]="isSavingPago"
+        (click)="addPago()"
+        class="btn btn-blue margin-r-1"
+      >
+        <fa-icon
+          class="margin-r-1"
+          *ngIf="isSavingPago"
+          [icon]="faCircleNotch"
+          [spin]="isSavingPago"
+        ></fa-icon>
+        {{ isSavingPago ? "Procesando.." : "Enviar Información del Pago" }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="" *ngIf="modalCuentas == true">
+  <app-modal-infocuentas class="modal"></app-modal-infocuentas>
+</div>

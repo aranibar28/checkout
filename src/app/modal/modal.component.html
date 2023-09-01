@@ -1,0 +1,47 @@
+<div
+  style="margin-top: -10rem"
+  class="row w-50 bg-white border-radius-1 overflow-hidden"
+>
+  <div class="row justify-space-between padding-2 bg-g-blue align-center">
+    <span class="text-white" style="font-size: 20px">Checkout</span>
+    <button class="btn btn-rounded btn-blue" (click)="closeModal()">
+      <i style="font-size: 20px" class="icon-cancel-circle"></i>
+    </button>
+  </div>
+
+  <div class="row padding-2">
+    <div class="c12 div-center">
+      <div style="font-size: 3rem">
+        <span
+          class="badge badge-checkout"
+          [class]="
+            loadingInp ? 'bg-warning' : status ? 'bg-success' : 'bg-danger'
+          "
+        >
+          <fa-icon
+            [icon]="loadingInp ? faCircleNotch : status ? faCheck : faTimes"
+          ></fa-icon>
+        </span>
+      </div>
+      <h5 style="font-size: 20px">{{ message }}</h5>
+    </div>
+  </div>
+  <div class="row padding-1 justify-center" style="border-top: 1px solid #efefef">
+    <button
+      *ngIf="
+        status && !subscripcionModel.i_FreeSubscription && idMetodoPago == 1
+      "
+      class="btn btn-blue margin-r-1"
+      (click)="showModalPago()"
+    >
+      Informar Pago
+    </button>
+    <button *ngIf="status" class="btn btn-outline-blue">
+      <fa-icon [icon]="faShare"></fa-icon> Reenviar correo
+    </button>
+  </div>
+</div>
+
+<div class="" *ngIf="modalPago == true">
+  <app-modal-pago class="modal"></app-modal-pago>
+</div>

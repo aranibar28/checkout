@@ -1,0 +1,43 @@
+.bg-orange {
+  background-color: $orange;
+}
+.bg-dark {
+  background-color: $dark;
+}
+
+.bg-grey {
+  background-color: $grey;
+}
+.bg-white {
+  background-color: $white;
+}
+.bg-platinum {
+  background-color: $platinum;
+}
+
+.bg-success {
+  background-color: green;
+}
+.bg-danger {
+  background-color: $red;
+}
+
+.bg-g-orange {
+  background: linear-gradient(to left, $orange, $orange-hover);
+}
+
+.bg-g-blue {
+  background: linear-gradient(to left, $blue, $blue-hover);
+}
+
+.bg-g-red {
+  background: linear-gradient(to left, $red, $red-hover);
+}
+
+.bg-g-platinum {
+  background: linear-gradient(to left, $platinum, $platinum-hover);
+}
+
+.bg-g-dark {
+  background: linear-gradient(to left, $dark, $dark-hover);
+}

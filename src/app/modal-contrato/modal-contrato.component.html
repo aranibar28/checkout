@@ -1,0 +1,22 @@
+<div style="margin-top: -5rem" class="row w-50 bg-white border-radius-1 overflow-hidden">
+  <div class="row justify-space-between padding-2 bg-g-blue align-center">
+    <span class="text-white" style="font-size: 20px">Contrato</span>
+    <button class="btn btn-rounded btn-blue" (click)="closeModal()">
+      <i style="font-size: 20px" class="icon-cancel-circle"></i>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row h-100 items-center padding-2">
+      <div class="c12">
+        <div style="font-size: 3rem" class="text-center" *ngIf="loading; else contrato">
+          <fa-icon [icon]="faCircleNotch" [spin]="loading"></fa-icon>
+          <h5 style="margin: 0; font-size: 20px">Cargando...</h5>
+        </div>
+        <ng-template #contrato>
+          <div style="margin-top: 10px" *ngIf="innerHtml" [innerHTML]="innerHtml"></div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

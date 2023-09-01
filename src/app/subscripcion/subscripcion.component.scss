@@ -1,0 +1,175 @@
+.premium-item {
+  position: absolute;
+  background: gold;
+  padding: 10px;
+  border-radius: 5px;
+  top: -16%;
+  right: -10%;
+  color: rgb(49, 49, 49);
+  z-index: 10;
+  box-shadow: rgba(0, 0, 0, 0.226) 2px 2px 5px;
+}
+.preload {
+  background: rgba(223, 223, 223, 0.712);
+  border-radius: 5px;
+  height: 55px;
+  width: 100%;
+  animation: preload 1s 1s alternate infinite;
+}
+.preload-1 {
+  background: rgba(223, 223, 223, 0.712);
+  border-radius: 5px;
+  height: 55px;
+  width: 100%;
+  animation: preload 1s 1s alternate infinite;
+}
+
+@keyframes preload {
+  0% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Estilo para cards */
+
+.grid {
+  display: flex;
+  justify-content: space-between;
+  grid-gap: 10px;
+  margin: 0 auto;
+  max-width: 60em;
+  padding: 0;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  position: relative;
+  transition: box-shadow 0.2s ease-out;
+
+  ::selection {
+    background-color: transparent;
+    color: inherit;
+    text-shadow: none;
+  }
+
+  &:hover {
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.plan-discount {
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #d72250;
+}
+
+.radio {
+  display: block;
+  font-size: inherit;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #fff;
+  border: 3px solid #e2ebf6;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 1em;
+  outline: none;
+  transition: background 0.2s ease-out, border-color 0.2s ease-out;
+  width: 1em;
+
+  &:checked {
+    background: #0d7cba;
+    border-color: #0d7cba;
+  }
+}
+
+.radio:focus {
+  + .plan-details {
+    box-shadow: 0 0 0 2px #c4d1e1;
+  }
+}
+
+.card:hover .radio,
+.card:hover .radio:checked {
+  border-color: #c4d1e1;
+
+  &:checked {
+    border-color: #0d7cba;
+  }
+}
+
+.plan-details {
+  border: 3px solid #e2ebf6;
+  border-radius: 0.5em;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  transition: border-color 0.2s ease-out;
+  height: 100%;
+}
+
+.card:hover .plan-details {
+  border-color: #c4d1e1;
+}
+
+.radio:checked ~ .plan-details,
+.card:hover .radio:checked ~ .plan-details {
+  border-color: #0d7cba;
+}
+
+.radio:disabled {
+  + .plan-details,
+  .plan-type {
+    color: #c4d1e1;
+    cursor: default;
+  }
+}
+
+.card:hover .radio:disabled,
+.card:hover .radio:disabled ~ .plan-details {
+  border-color: #e2ebf6;
+}
+
+.plan-type {
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.plan-cost {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.slash {
+  font-weight: normal;
+}
+
+.plan-cycle {
+  font-size: 0.75rem;
+  font-variant: none;
+  border-bottom: none;
+  cursor: inherit;
+  text-decoration: none;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}

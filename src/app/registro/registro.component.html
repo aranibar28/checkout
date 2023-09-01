@@ -1,0 +1,516 @@
+<div class="padding-y-2">
+  <div class="loading" *ngIf="loadingInfoPersona || loadingInfoPadron || isSaving">
+    <div class="loader"></div>
+  </div>
+  <div class="row justify-center">
+    <div class="c2">
+      <div class="row border-radius-1 border-1 border-grey overflow-hidden justify-start">
+        <div class="row bg-g-blue justify-center">
+          <span class="text-white padding-1">
+            <i class="icon-user-o"></i> Crear Cuenta</span>
+        </div>
+
+        <div class="row padding-x-1">
+          <div class="row border-bottom-1 border-grey padding-1">
+            <a (click)=" IsActiveContPaso1 && IsActiveContPaso2 ? gotoCheckout(1): null"
+              class="flex items-center w-100 micro-margin-y pointer" [class]="classNavPaso1">
+              <span class="badge rounded-pill bg-g-blue" style="margin-right: 3px">1</span>Datos de Usuario
+            </a>
+            <a (click)="IsActiveContPaso2 ? gotoCheckout(2) : null"
+              class="flex items-center w-100 micro-margin-y pointer" [class]="classNavPaso2">
+              <span class="badge rounded-pill bg-g-blue" style="margin-right: 3px">2</span>Datos de Empresa
+            </a>
+            <a (click)="IsActiveContPaso3 ? gotoCheckout(3) : null"
+              class="flex items-center w-100 micro-margin-y pointer" [class]="classNavPaso3">
+              <span class="badge rounded-pill bg-g-blue" style="margin-right: 3px">3</span>Checkout
+            </a>
+          </div>
+          <div class="row">
+            <div class="row padding-1">
+              <span class="w-100 font-size-small">Producto:</span>
+              <span *ngIf="loadingSessionPlans; else tsubname" class="w-100 font-size-1 preload-title">
+              </span>
+
+              <ng-template #tsubname>
+                <span class="w-100 font-size-1">{{
+                    subscripcion.v_SubscriptionName
+                  }}</span>
+              </ng-template>
+            </div>
+            <div class="row padding-1">
+              <span class="w-100 font-size-small">A pagar:</span>
+              <span *ngIf="loadingSessionPlans; else tgetTotal" class="w-100 font-size-1 preload-price"></span>
+              <ng-template #tgetTotal>
+                <span class="w-100 font-size-1">S/ {{ getTotal() | currency: "INR":"" }}</span>
+              </ng-template>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <img src="assets/img/app.jpg" class="w-100" />
+      </div>
+    </div>
+    <div class="c8">
+      <!--Paso 1-->
+      <form [formGroup]="userForm">
+        <div class="row" [class]="classContPaso1">
+          <div class="c12 items-center">
+            <div class="row w-75 padding-x-2 phone-w-100">
+              <div class="c12">
+                <span class="font-size-2">
+                  <i class="icon-right-circle text-blue margin-l-0"></i>Datos de Usuario
+                </span>
+              </div>
+            </div>
+
+            <div class="row w-75 padding-2 phone-w-100">
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="NumDoc">DNI <span class="text-danger">*</span></label>
+                <input maxlength="8" formControlName="NumDoc" type="text" name="NumDoc" id="NumDoc" appNumericOnly />
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="NombresUsuario">Nombres <span class="text-danger">*</span></label>
+                <input max="50" maxlength="50" type="text" formControlName="NombresUsuario" name="NombresUsuario"
+                  id="NombresUsuario" />
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="ApePatUsuario">Apellido Paterno <span class="text-danger">*</span></label>
+                <input max="50" maxlength="50" type="text" formControlName="ApePatUsuario" name="ApePatUsuario"
+                  id="ApePatUsuario" />
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="ApeMatUsuario">Apellido Materno <span class="text-danger">*</span></label>
+                <input max="50" maxlength="50" type="text" formControlName="ApeMatUsuario" name="ApeMatUsuario"
+                  id="ApeMatUsuario" />
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="CorreoOrganization">Correo <span class="text-danger">*</span></label>
+                <input max="100" maxlength="100" class="form-control" type="email" formControlName="CorreoOrganization"
+                  name="CorreoOrganization" id="CorreoOrganization" />
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="CorreoOrganizationRepeat">Confirmar Correo <span class="text-danger">*</span></label>
+                <input max="100" maxlength="100" class="form-control" type="email"
+                  formControlName="CorreoOrganizationRepeat" name="CorreoOrganizationRepeat"
+                  id="CorreoOrganizationRepeat" />
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="Telefono">Teléfono <span class="text-danger">*</span></label>
+                <input maxlength="15" type="text" formControlName="Telefono" name="Telefono" id="Telefono"
+                  appNumericOnly />
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="Usuario">Nombre de Usuario <span class="text-danger">*</span></label>
+                <input max="100" maxlength="100" type="text" formControlName="Usuario" name="Usuario" id="Usuario"
+                  onselectstart="return false" onpaste="return false" oncopy="return false" oncut="return false"
+                  ondrag="return false" ondrop="return false" autocomplete="off" />
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="password" style="z-index: 1;">
+                  Contraseña <span class="text-danger">*</span>
+                </label>
+                <div class="password-container">
+                  <input onselectstart="return false" ondrag="return false" ondrop="return false" autocomplete="off"
+                    class="form-control" type="{{ showPassword1 ? 'text' : 'password' }}" formControlName="Password"
+                    name="Password" id="Password" />
+                  <span class="password-toggle" (click)="showPassword1 = !showPassword1">
+                    <fa-icon [icon]="showPassword1 ? faEyeSlash : faEye"></fa-icon>
+                  </span>
+                </div>
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="RepeatPassword" style="z-index: 1;">
+                  Confirmar Contraseña <span class="text-danger">*</span>
+                </label>
+                <div class="password-container">
+                  <input onselectstart="return false" ondrag="return false" ondrop="return false" autocomplete="off"
+                    class="form-control" type="{{ showPassword2 ? 'text' : 'password' }}"
+                    formControlName="RepeatPassword" name="RepeatPassword" id="RepeatPassword" />
+                  <span class="password-toggle" (click)="showPassword2 = !showPassword2">
+                    <fa-icon [icon]="showPassword2 ? faEyeSlash : faEye"></fa-icon>
+                  </span>
+                </div>
+              </div>
+
+              <div class="row">
+                <h4>
+                  <i class="icon-attention-1"></i> Tu contraseña debe tener:
+                </h4>
+                <div class="row padding-x-2">
+                  <span class="w-100 font-size-small" [class.text-success]="ExistMinuscula">
+                    <fa-icon [icon]="ExistMinuscula ? faCheck : faTimes"></fa-icon>
+                    Al menos una letra minúscula
+                  </span>
+                  <span class="w-100 font-size-small" [class.text-success]="ExistMayuscula">
+                    <fa-icon [icon]="ExistMayuscula ? faCheck : faTimes"></fa-icon>
+                    Al menos una letra mayúscula
+                  </span>
+                  <span class="w-100 font-size-small" [class.text-success]="ExistNumero">
+                    <fa-icon [icon]="ExistNumero ? faCheck : faTimes"></fa-icon>
+                    Al menos un número
+                  </span>
+                  <span class="w-100 font-size-small" [class.text-success]="EigthCaracteres">
+                    <fa-icon [icon]="EigthCaracteres ? faCheck : faTimes"></fa-icon>
+                    Mas de 8 digitos
+                  </span>
+                </div>
+              </div>
+
+              <div class="row padding-2 justify-end">
+                <button (click)="nextCheckout(2)" [disabled]="!userForm.valid || PasswordValido" class="btn btn-blue">
+                  <span class="font-size-1 margin-2">
+                    Siguiente <fa-icon [icon]="faArrowRight"></fa-icon>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!--Paso 1-->
+
+      <!--Paso 2-->
+      <form [formGroup]="empresaForm">
+        <div class="row" [class]="classContPaso2">
+          <div class="c12 items-center">
+
+            <div class="row w-75 padding-x-2 phone-w-100">
+              <div class="c12">
+                <span class="font-size-2">
+                  <i class="icon-right-circle text-blue margin-l-0"></i>Datos de Empresa
+                </span>
+              </div>
+            </div>
+
+            <div class="row w-75 padding-2 phone-w-100">
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="Ruc">RUC <span class="text-danger">*</span></label>
+                <input type="text" maxlength="11" formControlName="Ruc" type="text" name="Ruc" id="Ruc"
+                  appNumericOnly />
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="RazonSocial">Razón Social <span class="text-danger">*</span></label>
+                <input type="text" formControlName="RazonSocial" name="RazonSocial" id="RazonSocial" />
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="NombreComercial">Nombre Comercial <span class="text-danger">*</span></label>
+                <input type="text" formControlName="NombreComercial" name="NombreComercial" id="NombreComercial" />
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="Urbanizacion">Urbanización</label>
+                <input type="text" formControlName="Urbanizacion" name="Urbanizacion" id="Urbanizacion" />
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="Direccion">Direccion <span class="text-danger">*</span></label>
+                <input type="text" formControlName="Direccion" name="Direccion" id="Direccion" />
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="IdDepartamento">Departamento <span class="text-danger">*</span></label>
+                <select (ngModelChange)="selectDepartamento($event)" class="form-control"
+                  formControlName="IdDepartamento" name="IdDepartamento" id="IdDepartamento">
+                  <option [ngValue]="0">--Seleccione--</option>
+                  <option [value]="item.i_ParameterId" [ngValue]="item" *ngFor="let item of lstDepartamentos">
+                    {{ item.v_Value1 }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="IdProvincia">Provincia <span class="text-danger">*</span></label>
+                <select (ngModelChange)="selectProvincia($event)" class="form-control" formControlName="IdProvincia"
+                  name="IdProvincia" id="IdProvincia">
+                  <option [ngValue]="0">--Seleccione--</option>
+                  <option [value]=" item.i_ParameterId" [ngValue]="item" *ngFor="let item of lstProvincias">
+                    {{ item.v_Value1 }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="c6 input-group-column micro-padding-x">
+                <label for="IdDistrito">Distrito <span class="text-danger">*</span></label>
+                <select (ngModelChange)="selectDistrito($event)" class="form-control" formControlName="IdDistrito"
+                  name="IdDistrito" id="IdDistrito">
+                  <option [ngValue]="0">--Seleccione--</option>
+                  <option [value]="item.i_ParameterId" [ngValue]="item" *ngFor="let item of lstDistritos">
+                    {{ item.v_Value1 }}
+                  </option>
+                </select>
+              </div>
+
+              <div class="row padding-y-2 justify-space-between phone-padding-none no-wrap">
+                <button (click)="backCheckout(1)" class="btn btn-blue">
+                  <span class="font-size-1 margin-2">
+                    <fa-icon [icon]="faArrowLeft"></fa-icon>
+                    Anterior</span>
+                </button>
+                <button (click)="nextCheckout(3)" [disabled]="!empresaForm.valid" class="btn btn-blue">
+                  <span class="font-size-1 margin-2">
+                    Siguiente <fa-icon [icon]="faArrowRight"></fa-icon>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <!--Paso 2-->
+
+      <!--Paso 3-->
+      <div class="row" [class]="classContPaso3">
+        <div class="c12 items-center">
+
+          <div class="row w-75 padding-x-2 phone-w-100">
+            <div class="c12">
+              <span class="font-size-2">
+                <i class="icon-right-circle text-blue margin-l-0"></i>Checkout
+              </span>
+            </div>
+          </div>
+
+          <div class="row w-75 padding-2 phone-w-100">
+            <div class="row">
+              <div class="row border-grey border-bottom-1">
+                <span class="text-blue">Producto</span>
+              </div>
+              <div class="row padding-1" *ngFor="let item of planes">
+                <span class="w-100 font-size-1 text-bolder">
+                  {{ subscripcion.v_SubscriptionName }}
+                </span>
+                <span class="w-100 font-size-small">
+                  {{ item.v_Nombre }} x {{ item.Cantidad }}
+                </span>
+              </div>
+            </div>
+            <div class="row" *ngIf="!subscripcion.i_FreeSubscription">
+              <div class="row border-grey border-bottom-1">
+                <span class="text-blue">Metodo de pago</span>
+              </div>
+              <div class="row">
+                <div class="c12">
+                  <div class="input-group-column">
+                    <label>Metodo:</label>
+                    <select [(ngModel)]="requescheckout.IdMetodoPago">
+                      <option value="0">--Seleccione--</option>
+                      <option *ngFor="let item of metodosPagos" value="{{ item.i_ParameterId }}">
+                        {{ item.v_Value1 }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row" [ngClass]="{ 'margin-t-1': !subscripcion.i_FreeSubscription }">
+              <div class="row border-grey border-bottom-1">
+                <span class="text-blue">Detalles de Pago</span>
+              </div>
+
+              <div class="row padding-1">
+                <table class="table text-left border-none" style="margin-left: -13px">
+                  <thead></thead>
+                  <tbody>
+                    <tr>
+                      <td>Subtotal:</td>
+                      <td class="text-right">
+                        S/ {{ getSubTotal() | currency: "INR":"" }}
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td>Descuento:</td>
+                      <td class="text-red text-right">
+                        - S/ {{ getDescuentoTotal() | currency: "INR":"" }}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Igv:</td>
+                      <td class="text-right">
+                        S/ {{ getIgvTotal() | currency: "INR":"" }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="row border-grey border-bottom-1">
+                <span class="text-blue">Total a Pagar</span>
+              </div>
+              <div class="row padding-1">
+                <span class="text-blue font-size-2">S/ {{ getTotal() | currency: "INR":"" }}
+                </span>
+              </div>
+              <div class="row items-center">
+                <input type="checkbox" [(ngModel)]="acceptTermins" id="acceptTermins" />
+                <a style="cursor: pointer" (click)="showContrato()" class="font-size-small text-blue">
+                  Acepto los términos y condiciones
+                </a>
+              </div>
+            </div>
+
+            <div class="row padding-y-2 justify-space-between phone-padding-none no-wrap">
+              <button (click)="backCheckout(2)" class="btn btn-blue">
+                <span class="font-size-1 margin-2">
+                  <fa-icon [icon]="faArrowLeft"></fa-icon> Anterior</span>
+              </button>
+              <button (click)="saveCheckout()" class="btn btn-blue" [disabled]="
+                  !empresaForm.valid || !userForm.valid || !acceptTermins">
+                <span class="font-size-1 margin-2"><i class="icon-basket"> </i> Comprar</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--Paso 3-->
+    </div>
+  </div>
+</div>
+
+<div *ngIf="modalShow == true">
+  <app-modal [loadingInp]="isSaving" [status]="responseCheckout.Status" [message]="responseCheckout.Message"
+    [idMetodoPago]="requescheckout.IdMetodoPago" class="modal"></app-modal>
+</div>
+
+<div *ngIf="modalContrato == true">
+  <app-modal-contrato class="modal" [requestContrato]="ContratoRequest" [list]="planesSession"></app-modal-contrato>
+</div>
+
+<div *ngIf="payment === true">
+  <div class="row">
+    <div class="modal">
+      <div class="c7 bg-white border-radius-1 overflow-hidden">
+        <div class="row bg-grey padding-1 justify-space-between align-center">
+          <h3 class="">
+            <i class="icon-lock-alt"></i>Cancela tu Pedido de Manera Segura
+          </h3>
+          <button style="border: 0" (click)="closeModalPayment()" class="button btn-rounded bg-white pointer">
+            <i class="icon-cancel"></i>
+          </button>
+        </div>
+
+        <div class="row padding-1 no-wrap">
+          <div class="c6 padding-x-2 border-1 border-grey border-radius-1 margin-1 h-auto">
+            <div class="row border-bottom-1 border-grey justify-space-between padding-y-1 align-center">
+              <h3>Detalles del Cliente</h3>
+              <i class="icon-user-o"></i>
+            </div>
+
+            <div class="row h-100">
+              <div class="c12 justify-space-between h-auto">
+                <div class="row">
+                  <div class="c12">
+                    <div class="input-group-column">
+                      <label for="">Correo</label>
+                      <input type="text" id="email" name="email" [(ngModel)]="paymentSetting.email" />
+                    </div>
+                    <div class="input-group-column">
+                      <label for="">Tipo de Documento</label>
+
+                      <select placeholder="Tipo de documento" id="docType" name="docType" data-checkout="docType"
+                        type="text" [(ngModel)]="paymentSetting.docType" class="form-control-select">
+                        <option value="0">--Seleccione--</option>
+                        <option *ngFor="let item of IdentificationTypes" value="{{ item.id }}">
+                          {{ item.name }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="input-group-column">
+                      <label for="">Número de Documento</label>
+                      <input id="docNumber" name="docNumber" data-checkout="docNumber" type="text"
+                        [(ngModel)]="paymentSetting.docNumber" appNumericOnly />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row no-wrap margin-y-1">
+                  <div class="c12">
+                    <img src="assets/img/proteccion.jpg" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="c6 border-1 border-grey border-radius-1 margin-1 overflow-hidden">
+            <div class="row border-bottom-1 border-platinum padding-1 bg-dark justify-space-between align-center">
+              <h3 class="text-white">Detalles de Tarjeta</h3>
+              <i class="icon-credit-card text-white"></i>
+            </div>
+
+            <div class="row padding-x-1">
+              <div class="c12">
+                <div class="input-group-column">
+                  <label for="cardholderName">Títular de Tarjeta</label>
+                  <input type="text" id="cardholderName" data-checkout="cardholderName"
+                    placeholder="Títular de la Tarjeta" />
+                </div>
+                <div class="input-group-column">
+                  <label for="cardNumber">Número de Tarjeta</label>
+
+                  <input (change)="getPaymentMethods()" class="grfont-ligth" type="text" id="cardNumber"
+                    data-checkout="cardNumber" onselectstart="return false" ondrag="return false" ondrop="return false"
+                    autocomplete="off" placeholder="0000 0000 0000 0000" />
+                </div>
+
+                <div class="row justify-between">
+                  <div class="c6">
+                    <div class="input-group-column margin-r-1">
+                      <label for="cardExpirationMonth">Mes</label>
+                      <input type="text" id="cardExpirationMonth" data-checkout="cardExpirationMonth" placeholder="MM"
+                        onselectstart="return false" ondrag="return false" ondrop="return false" autocomplete="off" />
+                    </div>
+                  </div>
+                  <div class="c6">
+                    <div class="input-group-column">
+                      <label for="cardExpirationYear">Año</label>
+                      <input type="text" id="cardExpirationYear" data-checkout="cardExpirationYear" placeholder="YY"
+                        onselectstart="return false" ondrag="return false" ondrop="return false" autocomplete="off" />
+                    </div>
+                  </div>
+                  <div class="c6">
+                    <div class="input-group-column margin-r-1">
+                      <label for="securityCode">CVV</label>
+                      <input id="securityCode" data-checkout="securityCode" type="text" onselectstart="return false"
+                        ondrag="return false" ondrop="return false" autocomplete="off" />
+                    </div>
+                  </div>
+                  <div class="c6">
+                    <div class="input-group-column">
+                      <label for="installments">Cuotas</label>
+                      <select style="height: 36px" class="form-control-select" id="installments" name="installments">
+                        <option *ngFor="let item of installments" value="{{ item.installments }}">
+                          {{ item.recommended_message }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row margin-y-1">
+                  <button (click)="createToken()" class="button btn-dark pointer w-100 font-size-1 padding-1">
+                    <i class="icon-money"></i> Pagar Ahora
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

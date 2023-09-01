@@ -1,0 +1,210 @@
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.no-wrap {
+  flex-wrap: nowrap;
+}
+
+
+.c1 {
+  width: 8.3%;
+  display: flex;
+  flex-direction: column;
+}
+.c2 {
+  width: 18.3%;
+  display: flex;
+  flex-direction: column;
+}
+.c3 {
+  width: 24.9%;
+  display: flex;
+  flex-direction: column;
+}
+.c4 {
+  width: 33.2%;
+  display: flex;
+  flex-direction: column;
+}
+.c5 {
+  width: 41.5%;
+  display: flex;
+  flex-direction: column;
+}
+.c6 {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.c7 {
+  width: 58.1%;
+  display: flex;
+  flex-direction: column;
+}
+.c8 {
+  width: 66.4%;
+  display: flex;
+  flex-direction: column;
+}
+.c9 {
+  width: 74.7%;
+  display: flex;
+  flex-direction: column;
+}
+.c10 {
+  width: 83%;
+  display: flex;
+  flex-direction: column;
+}
+.c11 {
+  width: 91.3%;
+  display: flex;
+  flex-direction: column;
+}
+.c12 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 990px) {
+
+  .phone-wrap{flex-wrap: wrap;}
+  .c1 {
+    flex-grow: unset;
+    width: 100%;
+  }
+  .c2 {
+    flex-grow: unset;
+    width: 100%;
+  }
+  .c3 {
+    flex-grow: unset;
+    width: 100%;
+  }
+  .c4 {
+    flex-grow: unset;
+    width: 100%;
+  }
+  .c5 {
+    flex-grow: unset;
+    width: 100%;
+  }
+  .c6 {
+    flex-grow: unset;
+    width: 100%;
+  }
+  .c7 {
+    flex-grow: unset;
+    width: 100%;
+  }
+  .c8 {
+    flex-grow: unset;
+    width: 100%;
+  }
+  .c9 {
+    flex-grow: unset;
+    width: 100%;
+  }
+  .c10 {
+    flex-grow: unset;
+    width: 100%;
+  }
+  .c11 {
+    flex-grow: unset;
+    width: 100%;
+  }
+  .c12 {
+    flex-grow: unset;
+    width: 100%;
+  }
+}
+
+//Overflow
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.scroll {
+  overflow: scroll;
+}
+.scroll-y {
+  overflow-y: scroll;
+}
+.scroll-x {
+  overflow-x: scroll;
+}
+
+@media (max-width: 580px) {
+
+
+  .phone-overflow {
+    overflow: scroll;
+  }
+  .phone-overflow-x-scroll {
+    overflow-x: scroll;
+  }
+  .phone-overflow-y-scroll {
+    overflow-y: scroll;
+  }
+}
+
+@media (max-width: 990px) {
+  .table-overflow {
+    overflow: scroll;
+  }
+  .table-overflow-x-scroll {
+    overflow-x: scroll;
+  }
+  .table-overflow-y-scroll {
+    overflow-y: scroll;
+  }
+}
+
+@media (min-width: 1280px) {
+  .overflow-y-scroll {
+    overflow-y: scroll;
+  }
+  .overflow-x-scroll {
+    overflow-x: scroll;
+  }
+}
+
+/*Flexbox*/
+
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-space-between {
+  justify-content: space-between;
+}
+.justify-around {
+  justify-content: space-around;
+}
+.align-center {
+  align-items: center;
+}
+.align-end {
+  align-items: flex-end;
+}
+
+//Postions
+
+.position-relative {
+  position: relative;
+}
+
+.h-auto{height: auto;}

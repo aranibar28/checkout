@@ -1,0 +1,55 @@
+<div class="row padding-y-2 justify-around">
+  <div class="c6 self-center align-end">
+    <section class="max-w-400 margin-right">
+
+      <div class="margin-b-1 text-bolder">
+        Elige un plan
+      </div>
+
+      <ng-container *ngIf="loadingPl">
+        <div class="flex justify-center gap-1 margin-b-1" style="height: 72px;">
+          <fa-icon [icon]="faSpinner" [spin]="loadingPl"></fa-icon> Cargando...
+        </div>
+        <div class="flex justify-center items-center w-100 loader" style="min-height: 400px;">
+          <fa-icon [icon]="faSpinner" [spin]="loadingPl"></fa-icon>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!loadingPl">
+        <div class="grid">
+          <ng-container *ngFor="let item of planes; let i = index">
+            <label class="card" [ngClass]="{ 'active': i === 2 }">
+              <input (click)="selectPlan(item)" name="plan" class="radio" type="radio" [checked]="i === 2">
+              <span *ngIf="item.d_PorcDescuento !== 0" class="plan-discount">Ahorra {{ item.d_PorcDescuento }}%</span>
+              <span class="plan-details">
+                <span class="plan-type">{{ getDisplayName(item.i_DuracionMeses) }}</span>
+                <span class="plan-cost">{{ getPlanCost(item, i) | currency: 'S/' }}
+                  <span class="slash">/</span><abbr class="plan-cycle">mes</abbr>
+                </span>
+              </span>
+            </label>
+          </ng-container>
+        </div>
+
+        <div class="text-center margin-t-1 w-100" style="min-height: 400px;">
+          <div class="image-container">
+            <img *ngIf="fadeIn" src="assets/img/plan_{{selectedImage}}.jpg" class="fade-in w-100" loading="lazy">
+          </div>
+        </div>
+      </ng-container>
+
+    </section>
+  </div>
+  <div class="c6 align-start">
+    <section class="max-w-500 margin-left padding-x-4 border-1 border-grey" style="height: 526px;">
+      <ng-container *ngIf="loadingPl">
+        <div class="flex justify-center items-center gap-1 h-100">
+          <fa-icon [icon]="faSpinner" [spin]="loadingPl"></fa-icon> Cargando...
+        </div>
+      </ng-container>
+      <ng-container *ngIf="selectedPlan.i_PlanId > 0;">
+        <app-plan-doce [licencias]="subscripcion.i_NumLicenses"></app-plan-doce>
+      </ng-container>
+    </section>
+  </div>
+</div>
